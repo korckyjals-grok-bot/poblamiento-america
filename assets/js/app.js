@@ -1,11 +1,11 @@
-/* El gran misterio del poblamiento — interfaz. v1.0.2 */
+/* El gran misterio del poblamiento — interfaz. v1.0.3 */
 (function () {
   'use strict';
   var D = window.POB_DATA, M = window.POB_MAP, E = window.POB_ENGINE;
   var $ = function (id) { return document.getElementById(id); };
   var TN = D.TN;
   function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
-  /* v1.0.2 — páginas: número o rango («2–5», «7 y 9») */
+  /* v1.0.3 — páginas: número o rango («2–5», «7 y 9») */
   function pgTxt(pg) { return (/–| y /.test(String(pg)) ? 'págs. ' : 'pág. ') + pg; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function show(id) { ['home', 'study', 'play', 'sum'].forEach(function (x) { $(x).classList.toggle('hid', x !== id); }); window.scrollTo(0, 0); }
@@ -113,8 +113,10 @@
     if (cur.kind === 'match') return drawMatch();
     var fixed = cur.sub === 'vf' || cur.sub === 'ns';
     var box = $('opts'); if (fixed) { box = document.createElement('div'); box.className = 'vf'; $('opts').appendChild(box); }
-    (fixed ? cur.o : E.shuffle(cur.o)).forEach(function (o) {
-      var b = document.createElement('button'); b.className = 'btn opt' + (o.length > 40 ? ' long' : ''); b.textContent = (fixed ? (o === 'Verdadero' ? '✅ ' : o === 'Falso' ? '❌ ' : o === 'Nómadas' ? '🚶 ' : '🏠 ') : '') + o; b.dataset.v = o;
+    var list = (fixed ? cur.o : E.shuffle(cur.o));
+    var long = list.some(function (o) { return o.length > 40; });
+    list.forEach(function (o) {
+      var b = document.createElement('button'); b.className = 'btn opt' + (long ? ' long' : ''); b.textContent = (fixed ? (o === 'Verdadero' ? '✅ ' : o === 'Falso' ? '❌ ' : o === 'Nómadas' ? '🚶 ' : '🏠 ') : '') + o; b.dataset.v = o;
       b.onclick = function () { answer(o, b); }; box.appendChild(b);
     });
   }
