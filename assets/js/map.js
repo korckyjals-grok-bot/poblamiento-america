@@ -1,4 +1,4 @@
-/* Mapa simplificado (no a escala), centrado en el océano Pacífico como los mapas del folleto. v1.0.4 */
+/* Mapa simplificado (no a escala), centrado en el océano Pacífico como los mapas del folleto. v1.0.5 */
 (function (g) {
   'use strict';
   var ZONES = [
