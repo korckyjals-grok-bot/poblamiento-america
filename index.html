@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sociales: El gran misterio del poblamiento</title>
+<link rel="icon" href="assets/favicon.svg?v=1.0.0" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/poblamiento.css?v=1.0.0">
+</head><body><div class="wrap">
+<p style="margin:0"><a class="back" href="https://korckyjals-grok-bot.github.io/sociales-inicio/" data-app="https://korckyjals-grok-bot.github.io/sociales-inicio/">⬅️ Inicio Sociales</a></p>
+<h1>🧭 El gran misterio del poblamiento</h1>
+
+<div id="home" class="card">
+<p style="font-size:1.15rem;text-align:center">¡Hola, <span class="nm">amiguito</span>! ¿Cómo llegaron los primeros seres humanos a América? Aprende las <b>teorías</b>, sus <b>rutas</b> y cómo vivían los primeros pueblos. <a href="#" onclick="cambiarNombre();return false" style="font-size:.9rem;color:#2b8de2;white-space:nowrap">✏️ Cambiar nombre</a></p>
+<button class="btn g" id="bStudy">📖 Estudiar</button>
+<div class="topics" id="topics">
+<label><input type="checkbox" value="mis" checked>🔍 El misterio y los viajeros<span class="chk no" data-t="mis" title="¡Tema superado!">✔</span></label>
+<label><input type="checkbox" value="teo" checked>🧭 Teorías y rutas (con mapa)<span class="chk no" data-t="teo" title="¡Tema superado!">✔</span></label>
+<label><input type="checkbox" value="caz" checked>🏹 Cazadores-recolectores<span class="chk no" data-t="caz" title="¡Tema superado!">✔</span></label>
+<label><input type="checkbox" value="soc" checked>🌽 Primeras sociedades de América<span class="chk no" data-t="soc" title="¡Tema superado!">✔</span></label>
+</div>
+<div class="row"><button class="btn" id="bPractice">✏️ Practicar</button><button class="btn o" id="bChal">⏱️ Desafío&nbsp;60&nbsp;s</button></div>
+<p style="text-align:center;font-size:1.05rem">✅ Supera el desafío con <b>13 o más y sin errores</b> para ganar el check verde de cada tema elegido.<br>🏆 Récord del desafío: <b id="best">0</b><br><span class="hint">En el desafío solo hay preguntas rápidas (sin mapa, sin ordenar ni relacionar). Solo práctica: no hay notas.</span></p>
+</div>
+
+<div id="study" class="card hid">
+<h2 id="stTitle">📖 Estudiar</h2>
+<div class="tabs" id="stTabs"></div>
+<div id="stRoute" class="hid">
+  <p class="hint" style="margin:10px 0 2px">Elige una ruta:</p>
+  <div class="tabs" id="rTabs"></div>
+  <div class="mapbox" id="rMap"></div>
+  <p class="legend">Mapa simplificado (no está a escala)</p>
+  <div class="rinfo" id="rInfo"></div>
+  <ol class="steps" id="rSteps"></ol>
+</div>
+<div id="stCards" class="hid">
+  <div id="fc" class="card fc" role="button" tabindex="0"></div>
+  <p class="hint" style="margin:0">Toca la tarjeta para darle vuelta</p>
+  <div class="row"><button class="btn gray" id="fcPrev">⬅️ Anterior</button><button class="btn" id="fcNext">Siguiente ➡️</button></div>
+</div>
+<button class="btn r" data-home>🏠 Inicio</button>
+</div>
+
+<div id="play" class="card hid">
+<div class="stats"><span>✅ <span id="sc">0</span></span><span>🔥 Racha: <span id="st">0</span></span><span id="cnt"></span></div>
+<div id="tm" class="timer hid"></div>
+<p style="margin:6px 0"><span class="tag" id="tg"></span></p>
+<div class="q" id="qt"></div>
+<div class="mapbox hid" id="pMap"></div>
+<div id="opts"></div>
+<div id="msg" class="msg" aria-live="polite"></div>
+<div id="exp" class="exp hid"></div>
+<div class="actions" id="pAct"><button class="btn g hid" id="nx">Siguiente ➡️</button></div>
+<button class="btn r" id="bFinish">Terminar</button>
+</div>
+
+<div id="sum" class="card hid"><h2 id="sumT"></h2><p id="sumP" style="font-size:1.2rem"></p><div id="sumL"></div>
+<button class="btn o hid" id="rep">🔁 Repasar errores</button>
+<button class="btn" data-home>🏠 Inicio</button></div>
+<p class="foot">v1.0.0 · Solo práctica · Basado en el folleto «El gran misterio del poblamiento»</p>
+</div>
+<div id="nmBox" style="display:none;position:fixed;inset:0;background:rgba(31,42,68,.55);z-index:99;align-items:center;justify-content:center;padding:16px">
+<form id="nmForm" style="background:#fff;border-radius:20px;padding:24px;max-width:420px;width:100%;text-align:center;font-family:inherit">
+<p style="font-size:1.4rem;font-weight:700;margin:0 0 12px">👋 ¡Hola! ¿Cómo te llamas?</p>
+<p style="font-size:1.05rem;margin:0 0 12px">Escribe tu nombre o tu apodo</p>
+<input id="nmIn" maxlength="20" autocomplete="off" style="width:100%;font-size:1.4rem;padding:12px;border:2px solid #2b8de2;border-radius:12px;text-align:center">
+<button type="submit" style="width:100%;font-size:1.3rem;padding:14px;margin-top:12px;border:0;border-radius:14px;background:#22a35a;color:#fff;font-weight:700;cursor:pointer">¡Listo! ✅</button>
+</form></div>
+<script>
+(function(){
+const K="sociales_nombre";
+function clean(s){return (s||"").replace(/[<>"]/g,"").trim().slice(0,20)}
+try{const q=clean(new URLSearchParams(location.search).get("nombre"));if(q)localStorage.setItem(K,q)}catch(e){}
+window.NM=function(){try{return clean(localStorage.getItem(K))||"amiguito"}catch(e){return "amiguito"}};
+function apply(){document.querySelectorAll(".nm").forEach(e=>e.textContent=NM());
+const n=(function(){try{return clean(localStorage.getItem(K))}catch(e){return ""}})();
+document.querySelectorAll("a[data-app]").forEach(a=>{a.href=a.dataset.app+(n?"?nombre="+encodeURIComponent(n):"")})}
+window.cambiarNombre=function(){const b=document.getElementById("nmBox"),i=document.getElementById("nmIn");i.value=NM()=="amiguito"?"":NM();b.style.display="flex";i.focus()};
+document.getElementById("nmForm").onsubmit=function(ev){ev.preventDefault();const v=clean(document.getElementById("nmIn").value);if(!v){document.getElementById("nmIn").focus();return}
+try{localStorage.setItem(K,v)}catch(e){}document.getElementById("nmBox").style.display="none";apply()};
+apply();
+if(window.ASK_NAME&&NM()=="amiguito")cambiarNombre();
+})();
+</script>
+<script src="assets/js/data.js?v=1.0.0"></script>
+<script src="assets/js/map.js?v=1.0.0"></script>
+<script src="assets/js/engine.js?v=1.0.0"></script>
+<script src="assets/js/app.js?v=1.0.0"></script>
+</body></html>

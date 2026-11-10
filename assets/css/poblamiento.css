@@ -1,0 +1,68 @@
+/* El gran misterio del poblamiento v1.0.0 — mismo lenguaje visual que las apps de Sociales (lencas, nahuas, dioses) y Stadt */
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(160deg,#fff6d6,#d9f2ff);color:#1f2a44;min-height:100vh}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+h1{text-align:center;font-size:1.9rem;margin:10px 0}h2{font-size:1.45rem;margin:8px 0}h3{margin:10px 0 6px}
+.card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,.1);margin:14px 0}
+.btn{display:block;width:100%;font-size:1.25rem;padding:16px;margin:8px 0;border:0;border-radius:16px;cursor:pointer;color:#fff;background:#2b8de2;font-weight:700;min-height:52px;touch-action:manipulation;font-family:inherit}
+.btn.g{background:#22a35a}.btn.o{background:#f08a24}.btn.r{background:#c7362b}.btn.gray{background:#8a94a8}.btn.p{background:#7b4fd6}.btn.y{background:#ffbf00;color:#1f2a44}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row .btn{flex:1;min-width:140px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}.tabs .btn{flex:1;min-width:120px;font-size:1.02rem;padding:10px 8px;min-height:48px;margin:3px 0}
+.topics label{display:block;font-size:1.2rem;padding:12px;background:#e8f3ff;border-radius:12px;margin:6px 0;cursor:pointer}
+.topics input{transform:scale(1.5);margin-right:12px}
+.q{font-size:1.32rem;font-weight:700;margin:6px 0 10px;word-wrap:break-word}
+.opt{background:#eef1f6;color:#1f2a44;text-align:left}.opt.long{font-size:1.08rem;font-weight:600;line-height:1.35}
+.opt.ok{background:#22a35a;color:#fff}.opt.bad{background:#c7362b;color:#fff}
+.vf{display:flex;gap:10px}.vf .btn{flex:1;text-align:center}
+.exp{font-size:1.1rem;background:#fff6d6;border-left:6px solid #ffbf00;padding:12px;border-radius:10px;margin-top:10px}
+.exp .pg{display:block;font-size:.95rem;color:#5a6478;margin-top:6px}
+.stats{display:flex;justify-content:space-between;font-size:1.1rem;font-weight:700;flex-wrap:wrap;gap:8px}
+.tag{display:inline-block;padding:4px 10px;border-radius:10px;background:#ffd9cc;font-size:.95rem;font-weight:700}
+.fc{min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:1.3rem;cursor:pointer;background:#e8f3ff;padding:16px;line-height:1.45}
+.fc .big{font-size:1.6rem;font-weight:800;color:#1f5fd1}
+.timer{font-size:2rem;text-align:center;font-weight:800;color:#c7362b}.hid{display:none!important}
+.msg{font-size:1.25rem;text-align:center;font-weight:700;min-height:1.6em}
+ul{font-size:1.05rem}li{margin:6px 0}
+.chk{display:inline-block;margin-left:10px;background:#22a35a;color:#fff;border-radius:50%;width:2rem;height:2rem;line-height:2rem;text-align:center;font-size:1.3rem;font-weight:900;vertical-align:middle}.chk.no{display:none}
+.hint{font-size:1rem;color:#5a6478;text-align:center}
+a.back{color:#2b8de2;font-weight:700;text-decoration:none}
+/* Ordenar */
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+.chip{font-size:1.12rem;padding:12px 14px;border:0;border-radius:12px;background:#e8f3ff;color:#1f2a44;font-weight:700;cursor:pointer;min-height:48px;font-family:inherit;text-align:left;touch-action:manipulation}.chip:disabled{opacity:.3}
+.built{min-height:3.2rem;font-size:1.15rem;background:#fff6d6;border-radius:12px;padding:10px;text-align:center;font-weight:700;line-height:1.5}
+.built.ok{background:#c9f1d8}.built.bad{background:#ffd6d1}
+/* Relacionar */
+.pairs{margin:6px 0}
+.pr{display:flex;align-items:stretch;gap:8px;margin:8px 0;border-radius:14px;background:#f4f7fb;padding:8px;cursor:pointer;border:3px solid transparent}
+.pr.active{border-color:#f08a24;background:#fff1dc}
+.pr .l{flex:1 1 45%;font-weight:800;font-size:1.08rem;display:flex;align-items:center}
+.pr .r{flex:1 1 55%;font-size:1.05rem;background:#fff;border-radius:10px;padding:8px 10px;min-height:44px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;border:2px dashed #b8c4d8}
+.pr .r.fill{border-style:solid;border-color:#2b8de2;font-weight:700}
+.pr.ok{background:#e3f7ea}.pr.ok .r{border-color:#22a35a}
+.pr.bad{background:#ffe7e3}.pr.bad .r{border-color:#c7362b}
+.pr .fix{display:block;width:100%;font-size:.95rem;color:#14703c;font-weight:700;margin-top:4px}
+/* Mapa */
+.mapbox{margin:8px auto;max-width:560px}
+svg.map{width:100%;height:auto;display:block;border-radius:18px;touch-action:manipulation}
+svg.map .ocean{font:700 11px "Segoe UI",Arial,sans-serif;fill:#3c7fb3;text-anchor:middle;letter-spacing:1px}
+svg.map .cont{font:800 10px "Segoe UI",Arial,sans-serif;fill:#6b5426;text-anchor:middle}
+svg.map .zl[text-anchor=end]{text-anchor:end}
+svg.map .zl{font:800 11px "Segoe UI",Arial,sans-serif;fill:#1f2a44;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px}
+svg.map .zone .hit{fill:rgba(255,255,255,.01)}
+svg.map .zone .dot{fill:#fff;stroke:#1f5fd1;stroke-width:3}
+.tapmap .zone{cursor:pointer}.tapmap .zone:hover .dot,.tapmap .zone:focus .dot{fill:#ffe9b8;stroke-width:4}
+svg.map .zone.ok .dot{fill:#22a35a;stroke:#fff}
+svg.map .zone.bad .dot{fill:#c7362b;stroke:#fff}
+.legend{font-size:1rem;text-align:center;color:#3b4660;margin:4px 0 8px}
+.steps{list-style:none;padding:0;margin:8px 0;counter-reset:s}
+.steps li{display:flex;gap:10px;align-items:center;background:#f4f7fb;border-radius:14px;padding:8px 10px;margin:6px 0;font-size:1.15rem}
+.steps .n{flex:none;color:#fff;border-radius:50%;width:2rem;height:2rem;line-height:2rem;text-align:center;font-weight:800}
+.rinfo{font-size:1.1rem;line-height:1.45}
+/* Barra de acciones (fija abajo cuando hay respuesta) */
+.actions{position:static;bottom:0;z-index:5;padding:10px 0 12px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.97) 28%)}
+.actions.stick{position:sticky;box-shadow:0 -6px 12px -8px rgba(31,42,68,.25)}
+.actions .btn{margin:4px 0}
+.msg,.exp,.pairs,.built{scroll-margin-bottom:110px}
+.foot{font-size:.95rem;color:#5a6478;text-align:center;margin:8px 0 20px}
+@media (max-width:420px){.wrap{padding:10px}.card{padding:14px}h1{font-size:1.5rem}.btn{font-size:1.15rem}.q{font-size:1.18rem}.pr .l{font-size:1rem}.pr .r{font-size:.98rem}#home .row .btn{padding-left:8px;padding-right:8px;min-width:0}.tabs .btn{min-width:46%}}
