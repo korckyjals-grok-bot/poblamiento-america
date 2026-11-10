@@ -1,4 +1,4 @@
-/* Mapa simplificado (no a escala), centrado en el océano Pacífico como los mapas del folleto. v1.0.0 */
+/* Mapa simplificado (no a escala), centrado en el océano Pacífico como los mapas del folleto. v1.0.1 */
 (function (g) {
   'use strict';
   var ZONES = [
@@ -6,7 +6,7 @@
     { id: 'bering', n: 'Estrecho de Bering', x: 164, y: 30, lx: 164, ly: 14 },
     { id: 'alaska', n: 'Alaska', x: 206, y: 50, lx: 206, ly: 74 },
     { id: 'polinesia', n: 'Polinesia', x: 196, y: 186, lx: 196, ly: 166 },
-    { id: 'costas', n: 'Costas de Perú, Ecuador y Chile', x: 290, y: 206, lx: 274, ly: 232, l2: ['Costas de Perú,', 'Ecuador y Chile'], anchor: 'end' },
+    { id: 'costas', n: 'Costas de Perú, Ecuador y norte de Chile', x: 290, y: 206, lx: 274, ly: 232, l2: ['Costas de Perú, Ecuador', 'y norte de Chile'], anchor: 'end' },
     { id: 'australia', n: 'Australia', x: 70, y: 214, lx: 70, ly: 256 },
     { id: 'antartida', n: 'Antártida', x: 170, y: 306, lx: 108, ly: 310 },
     { id: 'fuego', n: 'Tierra del Fuego', x: 300, y: 272, lx: 352, ly: 286 }

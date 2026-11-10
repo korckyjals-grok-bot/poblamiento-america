@@ -1,10 +1,12 @@
-/* El gran misterio del poblamiento — interfaz. v1.0.0 */
+/* El gran misterio del poblamiento — interfaz. v1.0.1 */
 (function () {
   'use strict';
   var D = window.POB_DATA, M = window.POB_MAP, E = window.POB_ENGINE;
   var $ = function (id) { return document.getElementById(id); };
   var TN = D.TN;
   function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
+  /* v1.0.1 — páginas: número o rango («2–5», «7 y 9») */
+  function pgTxt(pg) { return (/–| y /.test(String(pg)) ? 'págs. ' : 'pág. ') + pg; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function show(id) { ['home', 'study', 'play', 'sum'].forEach(function (x) { $(x).classList.toggle('hid', x !== id); }); window.scrollTo(0, 0); }
   function store() { try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); return localStorage; } catch (e) { var m = {}; return { getItem: function (k) { return k in m ? m[k] : null; }, setItem: function (k, v) { m[k] = String(v); }, removeItem: function (k) { delete m[k]; } }; } }
@@ -55,14 +57,14 @@
       $('rSteps').innerHTML = '';
     } else {
       var R = D.ROUTES[rSel];
-      $('rInfo').innerHTML = '<p><b>' + R.name + '</b><br>👤 ' + R.who + '<br>🚶 ' + R.how + '<br><span class="hint">📄 Folleto, pág. ' + R.pg + '</span></p><p style="margin:4px 0"><b>Ruta para memorizar:</b></p>';
+      $('rInfo').innerHTML = '<p><b>' + R.name + '</b><br>👤 ' + R.who + '<br>🚶 ' + R.how + '<br><span class="hint">📄 Folleto, ' + pgTxt(R.pg) + '</span></p><p style="margin:4px 0"><b>Ruta para memorizar:</b></p>';
       $('rSteps').innerHTML = [R.who].concat(R.steps).map(function (s, i) { return '<li><span class="n" style="background:' + R.color + '">' + (i === 0 ? '👤' : i) + '</span><span>' + s + '</span></li>'; }).join('');
     }
   }
   function drawFc() {
     var cs = D.CARDS[stTab], c = cs[fcI];
     $('stTitle').textContent = '📖 ' + TN[stTab] + ' (' + (fcI + 1) + '/' + cs.length + ')';
-    $('fc').innerHTML = fcF ? '<div>' + esc(c[1]) + '</div><div class="hint" style="margin-top:8px">📄 pág. ' + c[2] + '</div>' : '<div class="big">' + esc(c[0]) + '</div>';
+    $('fc').innerHTML = fcF ? '<div>' + esc(c[1]) + '</div><div class="hint" style="margin-top:8px">📄 ' + pgTxt(c[2]) + '</div>' : '<div class="big">' + esc(c[0]) + '</div>';
   }
   $('fc').onclick = function () { fcF = !fcF; drawFc(); };
   $('fc').onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fcF = !fcF; drawFc(); } };
@@ -187,7 +189,7 @@
     else { streak = 0; missed.push(cur); $('msg').textContent = '¡Casi! Mira la respuesta correcta 💡'; }
     $('sc').textContent = score; $('st').textContent = streak; $('cnt').textContent = 'Preguntas: ' + done;
     if (chal) { setTimeout(function () { if (chal && left > 0) next(); }, ok ? 600 : 1600); return; }
-    $('exp').innerHTML = 'ℹ️ ' + esc(cur.e) + '<span class="pg">📄 Folleto, pág. ' + cur.pg + '</span>';
+    $('exp').innerHTML = 'ℹ️ ' + esc(cur.e) + '<span class="pg">📄 Folleto, ' + pgTxt(cur.pg) + '</span>';
     $('exp').classList.remove('hid'); $('nx').classList.remove('hid'); $('pAct').classList.add('stick');
     revealAbove($('exp'));
   }
@@ -202,7 +204,7 @@
       if (res.granted) { drawCk(); t = '✅ ¡Tema superado! ' + score + ' sin errores. ¡Bravo, ' + window.NM() + '!'; }
     }
     $('sumT').textContent = t; $('sumP').textContent = 'Respondiste bien ' + score + ' de ' + done + ' preguntas.';
-    $('sumL').innerHTML = missed.length ? '<h3>Para repasar:</h3><ul>' + missed.map(function (q) { return '<li><b>' + esc(q.q) + '</b><br>✔️ ' + esc(q.kind === 'tap' ? zoneName(q.a) : q.a) + ' — ' + esc(q.e) + ' <span class="hint">(pág. ' + q.pg + ')</span></li>'; }).join('') + '</ul>' : '<p>¡No tuviste errores! 🎉</p>';
+    $('sumL').innerHTML = missed.length ? '<h3>Para repasar:</h3><ul>' + missed.map(function (q) { return '<li><b>' + esc(q.q) + '</b><br>✔️ ' + esc(q.kind === 'tap' ? zoneName(q.a) : q.a) + ' — ' + esc(q.e) + ' <span class="hint">(' + pgTxt(q.pg) + ')</span></li>'; }).join('') + '</ul>' : '<p>¡No tuviste errores! 🎉</p>';
     $('rep').classList.toggle('hid', !missed.length); show('sum');
   }
   $('bFinish').onclick = finish;
