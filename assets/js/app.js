@@ -1,11 +1,11 @@
-/* El gran misterio del poblamiento — interfaz. v1.0.1 */
+/* El gran misterio del poblamiento — interfaz. v1.0.2 */
 (function () {
   'use strict';
   var D = window.POB_DATA, M = window.POB_MAP, E = window.POB_ENGINE;
   var $ = function (id) { return document.getElementById(id); };
   var TN = D.TN;
   function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
-  /* v1.0.1 — páginas: número o rango («2–5», «7 y 9») */
+  /* v1.0.2 — páginas: número o rango («2–5», «7 y 9») */
   function pgTxt(pg) { return (/–| y /.test(String(pg)) ? 'págs. ' : 'pág. ') + pg; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function show(id) { ['home', 'study', 'play', 'sum'].forEach(function (x) { $(x).classList.toggle('hid', x !== id); }); window.scrollTo(0, 0); }
@@ -163,7 +163,7 @@
     paint();
     $('opts').append(hint, wrap, ch, ok);
   }
-  var GOOD = ['¡Muy bien! 🎉', '¡Excelente! ⭐', '¡Correcto! 👏', '¡Eres un crack! 🚀', '¡Súper! 💪'];
+  var GOOD = ['¡Muy bien! 🎉', '¡Excelente! ⭐', '¡Correcto! 👏', '¡Lo hiciste genial! 🚀', '¡Súper! 💪'];
   function answer(given, el, bx) {
     if (answered) return; answered = true; done++;
     var ok = E.isRight(cur, given);
