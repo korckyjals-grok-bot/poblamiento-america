@@ -1,4 +1,4 @@
-/* Lógica pura (sin DOM): puntaje, marca verde, selección sin repetir. v1.0.3 */
+/* Lógica pura (sin DOM): puntaje, marca verde, selección sin repetir. v1.0.4 */
 (function (g) {
   'use strict';
   var CK = 'sociales_check_poblamiento', BK = 'poblamiento_best', TOPICS = ['mis', 'teo', 'caz', 'soc'];
